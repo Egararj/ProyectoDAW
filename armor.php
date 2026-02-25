@@ -17,7 +17,7 @@
                 <div class="caja">
                     <div class ="caja-interior" id="head">
                         <img src="img/armor/head-icon.png" style="width: 30px;height: 30px;">
-                        <p>Casco</p>
+                        <p>Cabeza</p>
                         <br>
                         <p id="head-title"></p>
                     </div>
@@ -31,11 +31,11 @@
                     </div>
                 </div>
                 <div class="caja">
-                    <div class ="caja-interior" id="arms">
+                    <div class ="caja-interior" id="gloves">
                         <img src="img/armor/arms-icon.png" style="width: 30px;height: 30px;">
                         <p>Brazos</p>
                         <br>
-                        <p id="arms-title"></p>
+                        <p id="gloves-title"></p>
                     </div>
                 </div>
                 <div class="caja">
@@ -62,8 +62,86 @@
                 </div>
         </div>
         <div class="panel-derecho">
-                <div class="caja">1</div>
-
+                <div class="cajaInfo">
+                    <div class="container-fluid">
+                        <div style="display: flex;">
+                            <div style="width: 80%;">
+                                <button type="button" class="btn btn-light btn-sm">Set 1</button>
+                                <button type="button" class="btn btn-light btn-sm">Set 2</button>
+                                <button type="button" class="btn btn-light btn-sm">Set 3</button>
+                            </div>
+                            <div style ="width: 20%;" class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm">Borrar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <hr>
+                        <h3>Defensa</h3>
+                        <hr>
+                        <ul id="ul-defensa">
+                            <li>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <img src="img/def/defense-icon.png" class="img-icono"> 
+                                        <span>Defensa</span>
+                                    </div>
+                                    <div id="defense">0</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="display: flex; justify-content: space-between; background-color: rgba(120, 120, 120, 0.3)">
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <img src="img/def/fire-icon.png" class="img-icono"> 
+                                        <span>Fuego</span>
+                                    </div>
+                                    <div id="fire">0</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <img src="img/def/water-icon.png" class="img-icono"> 
+                                        <span>Agua</span>
+                                    </div>
+                                    <div id="water">0</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="display: flex; justify-content: space-between; background-color: rgba(120, 120, 120, 0.3)">
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <img src="img/def/thunder-icon.png" class="img-icono"> 
+                                        <span>Trueno</span>
+                                    </div>
+                                    <div id="thunder">0</div>
+                                </div> 
+                            </li>
+                            <li>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <img src="img/def/ice-icon.png" class="img-icono"> 
+                                        <span>Hielo</span>
+                                    </div>
+                                    <div id="ice">0</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="display: flex; justify-content: space-between; background-color: rgba(120, 120, 120, 0.3)">
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <img src="img/def/dragon-icon.png" class="img-icono"> 
+                                        <span>Dragón</span>
+                                    </div>
+                                    <div id="dragon">0</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <hr>
+                        <h3>Habilidades</h3>
+                        <hr>
+                        <ul id="ul-habilidades"></ul>
+                        </ul>
+                    </div>
+                </div>
         </div>
     </div>
 <dialog id="modal">

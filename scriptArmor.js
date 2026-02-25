@@ -1,42 +1,59 @@
 let armaduras = null;
+let habilidades = null;
 const modal = document.getElementById("modal");
 
-async function obtenerArmaduras() {
-  try {
+const setCompleto = {
+  equipamiento:{
+    head: null,
+    chest: null,
+    gloves: null,
+    waist: null,
+    legs: null,
+  },
+  charm: null,
+  habilidades: []
+};
 
-    const respuesta = await fetch("https://mhw-db.com/armor");
-    armaduras = await respuesta.json();
-    console.log(armaduras);
+// Función para obtener las armaduras desde la API
+async function obtenerArmadurasYHabilidades() {
+  try {
+    const [respArmaduras, respHabilidades] = await Promise.all([
+      fetch("https://mhw-db.com/armor"),
+      fetch("https://mhw-db.com/skills")
+    ]);
+    armaduras = await respArmaduras.json();
+    habilidades = await respHabilidades.json();
   } catch (error) {
     console.error("Error:", error);
   }
 }
-obtenerArmaduras();
+obtenerArmadurasYHabilidades();
 
 document.getElementById("head").addEventListener("click", function() {
-    abrirListaModal("head");
+  abrirListaModal("head");
 });
 
 document.getElementById("chest").addEventListener("click", function() {
-    abrirListaModal("chest");
+  abrirListaModal("chest");
 });
 
-document.getElementById("arms").addEventListener("click", function() {
-    abrirListaModal("arms");
+document.getElementById("gloves").addEventListener("click", function() {
+  abrirListaModal("gloves");
 });
 
 document.getElementById("waist").addEventListener("click", function() {
-    abrirListaModal("waist");
+  abrirListaModal("waist");
 });
 
 document.getElementById("legs").addEventListener("click", function() {
-    abrirListaModal("legs");
+  abrirListaModal("legs");
 });
 
 document.getElementById("charm").addEventListener("click", function() {
-    abrirListaModalCharm();
+  abrirListaModalCharm();
 });
 
+// Función para abrir el modal con la lista de armaduras filtradas por tipo
 function abrirListaModal(parteArmadura) {
   const ul = document.getElementById("ul-modal");
   ul.innerHTML = "";
@@ -62,6 +79,8 @@ function abrirListaModal(parteArmadura) {
     li.addEventListener("click", () => {
       const p = document.getElementById(parteArmadura + "-title");
       p.textContent = armadura.name;
+      setCompleto.equipamiento[parteArmadura] = armadura.id;
+      actualizarInfoStats();
       modal.close();
     });
 
@@ -77,9 +96,120 @@ function abrirListaModalCharm() {
 
 }
 
-//Cierra el modal si haciendo click fuera de él
+//Cierra el modal haciendo click fuera de él o en ningún elemento del modal
 modal.addEventListener("click", (e) => {
   if (e.target === modal) {
     modal.close();
   }
 });
+
+function actualizarInfoStats() {
+  resetearDefensa();
+  resetearHabilidades();
+  const ulHabilidades = document.getElementById("ul-habilidades");
+  ulHabilidades.innerHTML = "";
+  console.log(setCompleto.habilidades);
+  for(const habilidad of setCompleto.habilidades) {
+    const idHabilidad = habilidad.id;
+    const rankHabilidad = habilidad.rank;
+
+    const habilidadInfo = habilidades.find(h => h.id === idHabilidad);
+    const nombreHabilidad = habilidadInfo.name;
+    const rankActual = habilidadInfo.ranks[rankHabilidad];
+    const descripcionHabilidad = rankActual.description;
+    const nivelActual = rankHabilidad + 1;
+    const nivelMaximo = habilidadInfo.ranks.length;
+
+    const li = document.createElement("li");
+    const divPadre = document.createElement("div");
+    const divNombre = document.createElement("div");
+    const divNivel = document.createElement("div");
+    divPadre.style = "display: flex; justify-content: space-between;";
+    divNombre.style = "display: flex; align-items: center; gap: 5px;";
+    divNombre.style.cursor = "pointer";
+    divNombre.textContent = `${nombreHabilidad}`;
+    divNivel.textContent = `Nivel: ${nivelActual}/${nivelMaximo}`;
+    divPadre.appendChild(divNombre);
+    divPadre.appendChild(divNivel);
+    li.appendChild(divPadre);
+
+    //Cuadro informativo al pasar el mouse por encima de la habilidad
+    divNombre.addEventListener("mouseover", () => {
+      const tooltip = document.createElement("div");
+      tooltip.id = "tooltip"; 
+      tooltip.textContent = descripcionHabilidad;
+      tooltip.style.position = "fixed";
+      tooltip.style.backgroundColor = "rgba(50, 50, 50, 1)";
+      tooltip.style.color = "white";
+      tooltip.style.padding = "5px 12px";
+      tooltip.style.borderRadius = "5px";
+      tooltip.style.border = "1px solid white";
+      document.body.appendChild(tooltip);
+      const rect = divNombre.getBoundingClientRect();
+      tooltip.style.top = `${rect.top}px`;
+      tooltip.style.left = `${rect.left - tooltip.offsetWidth - 10}px`;
+    });
+    divNombre.addEventListener("mouseleave", () => {
+      const tooltip = document.getElementById("tooltip");
+      if (tooltip) {
+        tooltip.remove();
+      }
+    });
+    ulHabilidades.appendChild(li);
+  }
+};
+
+function resetearHabilidades() {
+  setCompleto.habilidades = [];
+  for (const parte in setCompleto.equipamiento) {
+    if(setCompleto.equipamiento[parte] !== null) {
+      const idArmadura = setCompleto.equipamiento[parte];
+      const armadura = armaduras.find(a => a.id === idArmadura);
+      for(const habilidad of armadura.skills) {
+        const idHabilidad = habilidad.skill;
+        const nivel = habilidad.level;
+        if(!setCompleto.habilidades.some(h => h.id === idHabilidad)) {
+          setCompleto.habilidades.push({id: idHabilidad, rank: nivel-1});
+        }else {
+          const habilidadExistente = setCompleto.habilidades.find(h => h.id === idHabilidad);
+          habilidadExistente.rank += nivel;
+          if(habilidadExistente.rank >= habilidades.find(h => h.id === idHabilidad).ranks.length-1) {
+            habilidadExistente.rank = habilidades.find(h => h.id === idHabilidad).ranks.length-1;
+          }
+        }
+      }
+    }
+  }
+};
+
+function resetearDefensa() {
+  const defensa = document.getElementById("defense");
+  const resistenciaFuego = document.getElementById("fire");
+  const resistenciaAgua = document.getElementById("water");
+  const resistenciaHielo = document.getElementById("ice");
+  const resistenciaTrueno = document.getElementById("thunder");
+  const resistenciaDragon = document.getElementById("dragon");
+  let defBase = 0, defMax = 0, defAug = 0, fire = 0, water = 0, ice = 0, thunder = 0, dragon = 0;
+
+  for(const parte in setCompleto.equipamiento){
+    if(setCompleto.equipamiento[parte] !== null){
+      const armadura = armaduras.find(a => a.id === setCompleto.equipamiento[parte]);
+      console.log(armadura);
+      defBase += armadura.defense.base;
+      defMax += armadura.defense.max;
+      defAug += armadura.defense.augmented;
+      fire += armadura.resistances.fire;
+      water += armadura.resistances.water;
+      ice += armadura.resistances.ice;
+      thunder += armadura.resistances.thunder;
+      dragon += armadura.resistances.dragon;
+
+      defensa.textContent = `Base:${defBase} | Max:${defMax} | Aug:${defAug}`;
+      resistenciaFuego.textContent = fire;
+      resistenciaAgua.textContent = water;
+      resistenciaHielo.textContent = ice;
+      resistenciaTrueno.textContent = thunder;
+      resistenciaDragon.textContent = dragon;
+    }
+  }
+}

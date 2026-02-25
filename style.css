@@ -1,5 +1,11 @@
 html, body {
-      height: 100%;
+    height: 100%;
+}
+
+hr {
+    border: 2px solid white;
+    width: 100%;
+    opacity: 1;
 }
 
 .fondo {
@@ -40,6 +46,18 @@ html, body {
     min-height: 150px;          
 }
 
+.cajaInfo{
+    height: 93%;
+    border-color: white;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .caja-interior{
     width: 90%;
     height: 90%;
@@ -58,7 +76,6 @@ html, body {
     justify-content: space-between;
     align-items: center;
 }
-
 
 .armadura-item-nombre{
     font-size: 20px;
@@ -82,11 +99,33 @@ html, body {
 #ul-modal li:hover div {
   background-color: rgb(100, 100, 100);
 }
+
+#ul-defensa {
+  list-style: none;
+}
+
+#ul-habilidades {
+  list-style: none;
+}
+
 #modal{
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     font-weight:bold;
     font-size: 30px;
     text-align: center;
+}
 
+.tooltip {
+  position: fixed;
+  background-color: rgba(51, 51, 51, 0.85);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: normal;
+  max-width: 250px;
+  pointer-events: none;
+  z-index: 99999;
+  border: 1px solid rgba(244, 244, 244, 0.2);
 }
