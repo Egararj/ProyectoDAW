@@ -58,6 +58,8 @@
                     <div class ="caja-interior" id="charm">
                         <img src="img/armor/charm-icon.png" style="width: 30px;height: 30px;">
                         <p>Amuleto</p>
+                        <br>
+                        <p id="charm-title"></p>
                     </div>
                 </div>
         </div>
@@ -71,7 +73,7 @@
                                 <button type="button" class="btn btn-light btn-sm">Set 3</button>
                             </div>
                             <div style ="width: 20%;" class="text-end">
-                                <button type="button" class="btn btn-danger btn-sm">Borrar</button>
+                                <button type="button" class="btn btn-danger btn-sm" id="borrarTodo">Borrar</button>
                             </div>
                         </div>
                     </div>

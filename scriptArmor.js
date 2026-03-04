@@ -1,5 +1,6 @@
 let armaduras = null;
 let habilidades = null;
+let amuletos = null;
 const modal = document.getElementById("modal");
 
 const setCompleto = {
@@ -10,19 +11,24 @@ const setCompleto = {
     waist: null,
     legs: null,
   },
-  charm: null,
+  charm:{
+    id: null,
+    rank: null,
+  },
   habilidades: []
 };
 
 // Función para obtener las armaduras desde la API
 async function obtenerArmadurasYHabilidades() {
   try {
-    const [respArmaduras, respHabilidades] = await Promise.all([
+    const [respArmaduras, respHabilidades, respAmuletos] = await Promise.all([
       fetch("https://mhw-db.com/armor"),
-      fetch("https://mhw-db.com/skills")
+      fetch("https://mhw-db.com/skills"),
+      fetch("https://mhw-db.com/charms")
     ]);
     armaduras = await respArmaduras.json();
     habilidades = await respHabilidades.json();
+    amuletos = await respAmuletos.json();
   } catch (error) {
     console.error("Error:", error);
   }
@@ -52,6 +58,9 @@ document.getElementById("legs").addEventListener("click", function() {
 document.getElementById("charm").addEventListener("click", function() {
   abrirListaModalCharm();
 });
+document.getElementById("borrarTodo").addEventListener("click",function() {
+  borrarTodo();
+})
 
 // Función para abrir el modal con la lista de armaduras filtradas por tipo
 function abrirListaModal(parteArmadura) {
@@ -69,8 +78,8 @@ function abrirListaModal(parteArmadura) {
     const resistenciasTexto = Object.entries(armadura.resistances)
       .map(([elemento, valor]) => `<img src="img/def/${elemento}-icon.png" class="img-icono"> : ${valor}`)
       .join("  ");
-    textoNombre = `${armadura.name}`;
-    textoDetalles = `<img src="img/def/defense-icon.png" class="img-icono"> base: ${armadura.defense.base}  <img src="img/def/defense-icon.png" class="img-icono"> max: ${armadura.defense.max}, Res: ${resistenciasTexto}`;
+    const textoNombre = `${armadura.name}`;
+    const textoDetalles = `<img src="img/def/defense-icon.png" class="img-icono"> base: ${armadura.defense.base}  <img src="img/def/defense-icon.png" class="img-icono"> max: ${armadura.defense.max}, Res: ${resistenciasTexto}`;
     divNombre.textContent = textoNombre;
     divDetalles.innerHTML = textoDetalles;
 
@@ -92,8 +101,51 @@ function abrirListaModal(parteArmadura) {
   modal.showModal();
 };
 
+// Función para abrir el modal con la lista de amuletos
 function abrirListaModalCharm() {
+const ul = document.getElementById("ul-modal");
+  ul.innerHTML = "";
+  for (const amuleto of amuletos) {
+    for(const rank of amuleto.ranks) {
+      const li = document.createElement("li");
+      const div = document.createElement("div");
+      const divNombre = document.createElement("div");
+      const divDetalles = document.createElement("div");
+      div.className = "amuleto-item";
+      divNombre.className = "amuleto-item-nombre";
+      divDetalles.className = "amuleto-item-def";
+      const textoNombre = `${rank.name}`;
+      let textoDetalles = null;
+      let contador = 0;
+      for(const skill of rank.skills){
+        if(contador === 0){
+          textoDetalles = `${skill.description}`;
+        }else{
+          textoDetalles += ` - ${skill.description}`;
+        }        
+        contador++;
+      }
+      divNombre.textContent = textoNombre;
+      divDetalles.innerHTML = textoDetalles;
 
+      // Botón de los li
+      li.style.cursor = "pointer";
+      li.addEventListener("click", () => {
+        const p = document.getElementById("charm-title");
+        p.textContent = rank.name;
+        setCompleto.charm.id = amuleto.id;
+        setCompleto.charm.rank = rank.level-1;
+        actualizarInfoStats();
+        modal.close();
+      });
+
+      div.appendChild(divNombre);
+      div.appendChild(divDetalles);
+      li.appendChild(div);
+      ul.appendChild(li);
+    }
+  }
+  modal.showModal();
 }
 
 //Cierra el modal haciendo click fuera de él o en ningún elemento del modal
@@ -180,6 +232,23 @@ function resetearHabilidades() {
       }
     }
   }
+  if(setCompleto.charm.id !== null) {
+    const amuleto = amuletos.find(a => a.id === setCompleto.charm.id);
+    const rank = amuleto.ranks[setCompleto.charm.rank];
+    for(const habilidad of rank.skills){
+      const idHabilidad = habilidad.skill;
+      const nivel = habilidad.level;
+      if(!setCompleto.habilidades.some(h => h.id === idHabilidad)) {
+        setCompleto.habilidades.push({id: idHabilidad, rank: nivel-1});
+      }else {
+        const habilidadExistente = setCompleto.habilidades.find(h => h.id === idHabilidad);
+        habilidadExistente.rank += nivel;
+        if(habilidadExistente.rank >= habilidades.find(h => h.id === idHabilidad).ranks.length-1) {
+          habilidadExistente.rank = habilidades.find(h => h.id === idHabilidad).ranks.length-1;
+        }
+      }
+    }
+  }
 };
 
 function resetearDefensa() {
@@ -190,7 +259,7 @@ function resetearDefensa() {
   const resistenciaTrueno = document.getElementById("thunder");
   const resistenciaDragon = document.getElementById("dragon");
   let defBase = 0, defMax = 0, defAug = 0, fire = 0, water = 0, ice = 0, thunder = 0, dragon = 0;
-
+  let hayPartes = false;
   for(const parte in setCompleto.equipamiento){
     if(setCompleto.equipamiento[parte] !== null){
       const armadura = armaduras.find(a => a.id === setCompleto.equipamiento[parte]);
@@ -210,6 +279,33 @@ function resetearDefensa() {
       resistenciaHielo.textContent = ice;
       resistenciaTrueno.textContent = thunder;
       resistenciaDragon.textContent = dragon;
+      hayPartes = true;
     }
   }
+  if(!hayPartes){
+    defensa.textContent = 0;
+    resistenciaFuego.textContent = fire;
+    resistenciaAgua.textContent = water;
+    resistenciaHielo.textContent = ice;
+    resistenciaTrueno.textContent = thunder;
+    resistenciaDragon.textContent = dragon;
+  }
+}
+
+function borrarTodo() {
+  setCompleto.equipamiento.head = null;
+  setCompleto.equipamiento.chest = null;
+  setCompleto.equipamiento.gloves = null;
+  setCompleto.equipamiento.waist = null;
+  setCompleto.equipamiento.legs = null;
+  setCompleto.charm.id = null;
+  setCompleto.charm.rank = null;
+  setCompleto.habilidades = [];
+  document.getElementById("head-title").textContent = "";
+  document.getElementById("chest-title").textContent = "";
+  document.getElementById("gloves-title").textContent = "";
+  document.getElementById("waist-title").textContent = "";
+  document.getElementById("legs-title").textContent = "";
+  document.getElementById("charm-title").textContent = "";
+  actualizarInfoStats();
 }

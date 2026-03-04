@@ -15,7 +15,7 @@ hr {
 
 .contenedor-panel{
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
 }
 .panel-izquierdo {
     width: 60%;
@@ -47,7 +47,7 @@ hr {
 }
 
 .cajaInfo{
-    height: 93%;
+    min-height: 93%;
     border-color: white;
     border-style: solid;
     border-radius: 10px;
@@ -77,11 +77,31 @@ hr {
     align-items: center;
 }
 
+.amuleto-item{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .armadura-item-nombre{
     font-size: 20px;
 }
 
+.amuleto-item-nombre{
+    font-size: 20px;
+}
+
 .armadura-item-def{
+    align-items:flex-end;
+    display: inline-flex;
+    font-size: 18px;
+}
+
+.amuleto-item-def{
     align-items:flex-end;
     display: inline-flex;
     font-size: 18px;
