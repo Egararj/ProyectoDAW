@@ -31,6 +31,8 @@ async function obtenerArmadurasYHabilidades() {
     amuletos = await respAmuletos.json();
   } catch (error) {
     console.error("Error:", error);
+  } finally {
+    document.getElementById("cargando").remove();
   }
 }
 obtenerArmadurasYHabilidades();
@@ -58,9 +60,41 @@ document.getElementById("legs").addEventListener("click", function() {
 document.getElementById("charm").addEventListener("click", function() {
   abrirListaModalCharm();
 });
+
 document.getElementById("borrarTodo").addEventListener("click",function() {
   borrarTodo();
+});
+
+document.getElementById("borrarHead").addEventListener("click", function(e){
+  e.stopPropagation();
+  borrarParteArmadura("head");
+});
+
+document.getElementById("borrarChest").addEventListener("click", function(e){
+  e.stopPropagation();
+  borrarParteArmadura("chest");
+});
+
+document.getElementById("borrarGloves").addEventListener("click", function(e){
+  e.stopPropagation();
+  borrarParteArmadura("gloves");
+});
+
+document.getElementById("borrarWaist").addEventListener("click", function(e){
+  e.stopPropagation();
+  borrarParteArmadura("waist");
+});
+
+document.getElementById("borrarLegs").addEventListener("click", function(e){
+  e.stopPropagation();
+  borrarParteArmadura("legs");
+});
+
+document.getElementById("borrarCharm").addEventListener("click", function(e){
+  e.stopPropagation();
+  borrarCharm();
 })
+
 
 // Función para abrir el modal con la lista de armaduras filtradas por tipo
 function abrirListaModal(parteArmadura) {
@@ -300,12 +334,24 @@ function borrarTodo() {
   setCompleto.equipamiento.legs = null;
   setCompleto.charm.id = null;
   setCompleto.charm.rank = null;
-  setCompleto.habilidades = [];
   document.getElementById("head-title").textContent = "";
   document.getElementById("chest-title").textContent = "";
   document.getElementById("gloves-title").textContent = "";
   document.getElementById("waist-title").textContent = "";
   document.getElementById("legs-title").textContent = "";
+  document.getElementById("charm-title").textContent = "";
+  actualizarInfoStats();
+}
+
+function borrarParteArmadura(parte) {
+  setCompleto.equipamiento[parte] = null;
+  document.getElementById(parte + "-title").textContent = "";
+  actualizarInfoStats();
+}
+
+function borrarCharm() {
+  setCompleto.charm.id = null;
+  setCompleto.charm.rank = null;
   document.getElementById("charm-title").textContent = "";
   actualizarInfoStats();
 }

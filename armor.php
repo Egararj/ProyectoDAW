@@ -12,12 +12,18 @@
       <a href="armor.php"><button type="button" class="btn btn-light btn-sm">Armaduras</button></a>
       <button type="button" class="btn btn-light btn-sm">Ejemplo</button>
     </div>
+    <div id="cargando">
+        <img src="img/felyne.gif" style="width: 100px; height: 100px; margin: 20px;;">
+        <p> Cargando datos... </p>
+        <img src="img/felyne.gif" style="width: 100px; height: 100px; margin: 20px;;">
+    </div>
     <div class="contenedor-panel">
         <div class="panel-izquierdo">
                 <div class="caja">
                     <div class ="caja-interior" id="head">
                         <img src="img/armor/head-icon.png" style="width: 30px;height: 30px;">
                         <p>Cabeza</p>
+                        <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarHead">X</button></div>
                         <br>
                         <p id="head-title"></p>
                     </div>
@@ -26,6 +32,7 @@
                     <div class ="caja-interior" id="chest">
                         <img src="img/armor/chest-icon.png" style="width: 30px;height: 30px;">
                         <p>Pecho</p>
+                        <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarChest">X</button></div>
                         <br>
                         <p id="chest-title"></p>
                     </div>
@@ -34,6 +41,7 @@
                     <div class ="caja-interior" id="gloves">
                         <img src="img/armor/arms-icon.png" style="width: 30px;height: 30px;">
                         <p>Brazos</p>
+                        <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarGloves">X</button></div>
                         <br>
                         <p id="gloves-title"></p>
                     </div>
@@ -42,6 +50,7 @@
                     <div class ="caja-interior" id="waist">
                         <img src="img/armor/waist-icon.png" style="width: 30px;height: 30px;">
                         <p>Cintura</p>
+                        <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarWaist">X</button></div>
                         <br>
                         <p id="waist-title"></p>
                     </div>
@@ -50,6 +59,7 @@
                     <div class ="caja-interior" id="legs">
                         <img src="img/armor/legs-icon.png" style="width: 30px;height: 30px;">
                         <p>Piernas</p>
+                        <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarLegs">X</button></div>
                         <br>
                         <p id="legs-title"></p>
                     </div>
@@ -58,6 +68,7 @@
                     <div class ="caja-interior" id="charm">
                         <img src="img/armor/charm-icon.png" style="width: 30px;height: 30px;">
                         <p>Amuleto</p>
+                        <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarCharm">X</button></div>
                         <br>
                         <p id="charm-title"></p>
                     </div>
