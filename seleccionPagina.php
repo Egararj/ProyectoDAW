@@ -14,6 +14,18 @@
         <h3>Seleccione una página</h3>
         <a href="armor.php"><button type="button" class="btn btn-light btn-lg">Armaduras</button></a>
         <button type="button" class="btn btn-light btn-lg">Ejemplo</button>
+        <?php
+          session_start();
+            if(isset($_SESSION["userName"])){           
+            ?>
+            <a href="cerrarSesion.php"><button type="button" class="btn btn-primary btn-lg">Cerrar sesión</button></a>
+            <?php
+          }else{
+            ?>
+            <a href="index.php"><button type="button" class="btn btn-primary btn-lg">Inicio</button></a>
+            <?php
+          }
+        ?>
       </div>
     </div>
   </div>

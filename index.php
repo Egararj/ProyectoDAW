@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="fondo">
+  <?php
+    session_start();
+    session_destroy();
+    setcookie(session_name(), '', time() - 3600, '/');
+  ?>
   <div class="d-flex justify-content-center align-items-center vh-100">
     <div>
       <!--Registro-->
@@ -15,7 +20,7 @@
         <h3>Registrarse</h3>
         <form action="" method="post">
             <input type="text" name="nombre" placeholder="Nombre" required><br>
-            <input type="text" name="email" placeholder="Email" required><br>
+            <input type="text" name="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]{1,3}" placeholder="Email" required><br>
             <!-- La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número-->
             <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="contraseña1" placeholder="Contraseña" required><br>
             <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="contraseña2" placeholder="Confirme contraseña" required><br><br>

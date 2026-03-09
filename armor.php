@@ -8,15 +8,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="fondo">
-    <div class="container-fluid text-center p-1 border bg-dark text-white" style="max-height: 100px;">
-      <a href="armor.php"><button type="button" class="btn btn-light btn-sm">Armaduras</button></a>
-      <button type="button" class="btn btn-light btn-sm">Ejemplo</button>
-    </div>
     <div id="cargando">
         <img src="img/felyne.gif" style="width: 100px; height: 100px; margin: 20px;;">
         <p> Cargando datos... </p>
         <img src="img/felyne.gif" style="width: 100px; height: 100px; margin: 20px;;">
     </div>
+    <div class="container-fluid text-center p-1 border bg-dark text-white" style="max-height: 100px;">
+      <a href="armor.php"><button type="button" class="btn btn-light btn-sm">Armaduras</button></a>
+      <button type="button" class="btn btn-light btn-sm">Ejemplo</button>
+      <?php
+          session_start();
+            if(isset($_SESSION["userName"])){           
+            ?>
+            <a href="cerrarSesion.php"><button type="button" class="btn btn-primary btn-sm">Cerrar sesión</button></a>
+            <?php
+          }else{
+            ?>
+            <a href="index.php"><button type="button" class="btn btn-primary btn-sm">Inicio</button></a>
+            <?php
+          }
+        ?>
+    </div>  
     <div class="contenedor-panel">
         <div class="panel-izquierdo">
                 <div class="caja">
@@ -78,13 +90,28 @@
                 <div class="cajaInfo">
                     <div class="container-fluid">
                         <div style="display: flex;">
-                            <div style="width: 80%;">
-                                <button type="button" class="btn btn-light btn-sm">Set 1</button>
-                                <button type="button" class="btn btn-light btn-sm">Set 2</button>
-                                <button type="button" class="btn btn-light btn-sm">Set 3</button>
+                            <div style="width: 85%;">
+                                <?php
+                                    if(isset($_SESSION["userName"])){           
+                                    ?>
+                                    <label>Cargar set:</label>
+                                    <button id="btnSet1" type="button" class="btn btn-light btn-sm">Set 1</button>
+                                    <button id="btnSet2" type="button" class="btn btn-light btn-sm">Set 2</button>
+                                    <button id="btnSet3" type="button" class="btn btn-light btn-sm">Set 3</button>
+                                    <br><br>
+                                    <label>Guardar set:</label>
+                                    <select id="selectSet" class="form-select d-inline-block" aria-label="Small select example" style="width: 85px;">
+                                        <option selected value="1">Set 1</option>
+                                        <option value="2">Set 2</option>
+                                        <option value="3">Set 3</option>
+                                    </select>
+                                    <button type="button" class="btn btn-light" id="guardarSet">Guardar</button>
+                                    <?php
+                                    }
+                                    ?>
                             </div>
-                            <div style ="width: 20%;" class="text-end">
-                                <button type="button" class="btn btn-danger btn-sm" id="borrarTodo">Borrar</button>
+                            <div style ="width: 15%;" class="text-end">
+                                <button type="button" class="btn btn-danger btn-sm" id="borrarTodo" title="Limpia los campos de armadura y charm">Borrar</button>
                             </div>
                         </div>
                     </div>

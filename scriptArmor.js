@@ -93,8 +93,21 @@ document.getElementById("borrarLegs").addEventListener("click", function(e){
 document.getElementById("borrarCharm").addEventListener("click", function(e){
   e.stopPropagation();
   borrarCharm();
-})
+});
 
+document.getElementById("guardarSet").addEventListener("click", guardarSet);
+
+document.getElementById("btnSet1").addEventListener("click", function(){
+  cargarSet("1");
+});
+
+document.getElementById("btnSet2").addEventListener("click", function(){
+  cargarSet("2");
+});
+
+document.getElementById("btnSet3").addEventListener("click", function(){
+  cargarSet("3");
+});
 
 // Función para abrir el modal con la lista de armaduras filtradas por tipo
 function abrirListaModal(parteArmadura) {
@@ -213,14 +226,15 @@ function actualizarInfoStats() {
     divPadre.style = "display: flex; justify-content: space-between;";
     divNombre.style = "display: flex; align-items: center; gap: 5px;";
     divNombre.style.cursor = "pointer";
-    divNombre.textContent = `${nombreHabilidad}`;
+    const textoNombre = `<img src="img/interrogation.png" class="img-icono"> ${nombreHabilidad}`;
+    divNombre.innerHTML = textoNombre;
     divNivel.textContent = `Nivel: ${nivelActual}/${nivelMaximo}`;
     divPadre.appendChild(divNombre);
     divPadre.appendChild(divNivel);
     li.appendChild(divPadre);
 
     //Cuadro informativo al pasar el mouse por encima de la habilidad
-    divNombre.addEventListener("mouseover", () => {
+    divNombre.addEventListener("mouseenter", () => {
       const tooltip = document.createElement("div");
       tooltip.id = "tooltip"; 
       tooltip.textContent = descripcionHabilidad;
@@ -244,6 +258,26 @@ function actualizarInfoStats() {
     ulHabilidades.appendChild(li);
   }
 };
+
+function actualizarCamposArmadurasYCharm() {
+  for(const [parte, idArmadura] of Object.entries(setCompleto.equipamiento)){
+    const p = document.getElementById(parte + "-title"); 
+    if(idArmadura !== null){
+      const armadura = armaduras.find(a => a.id === idArmadura);
+      p.textContent = armadura.name;    
+    }else{
+      p.textContent = "";
+    }
+  }
+
+  const pCharm = document.getElementById("charm-title");
+  if(setCompleto.charm.id !== null) {
+    const amuleto = amuletos.find(a => a.id === setCompleto.charm.id);
+    pCharm.textContent = amuleto.ranks[setCompleto.charm.rank].name;
+  }else{
+    pCharm.textContent = "";
+  }
+}
 
 function resetearHabilidades() {
   setCompleto.habilidades = [];
@@ -354,4 +388,50 @@ function borrarCharm() {
   setCompleto.charm.rank = null;
   document.getElementById("charm-title").textContent = "";
   actualizarInfoStats();
+}
+
+function guardarSet() {
+    const selectSet = document.getElementById('selectSet');
+    const numeroSet = selectSet.value;
+    
+    const datos = {
+        setCompleto: setCompleto,
+        numeroSet: numeroSet
+    };
+    
+    fetch('guardarSet.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            alert('Set ' + numeroSet + ' guardado correctamente');
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        alert('Error al guardar');
+    });
+}
+
+function cargarSet(numeroSet) {
+    fetch('cargarSet.php?set=' + numeroSet)
+    .then(response => response.json())
+    .then(data => {
+        if(data.success && data.setCompleto) {
+            setCompleto.equipamiento = data.setCompleto.equipamiento;
+            setCompleto.charm = data.setCompleto.charm;
+            actualizarInfoStats();
+            actualizarCamposArmadurasYCharm();
+            alert('Set ' + numeroSet + ' cargado');
+        } else {
+            alert('No hay datos guardados para Set ' + numeroSet);
+        }
+    });
 }
