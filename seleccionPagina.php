@@ -14,7 +14,7 @@
       <div class="d-inline-block text-center p-3 border bg-dark text-white">
         <h3>Seleccione una página</h3>
         <a href="armor.php"><button type="button" class="btn btn-light btn-lg">Armaduras</button></a>
-        <a href="listaMonstruos.php"><button type="button" class="btn btn-light btn-lg">Lista Monstruos</button></a>
+        <a href="listaMonstruos.php"><button type="button" class="btn btn-light btn-lg">Lista de Monstruos</button></a>
         <?php
           session_start();
             if(isset($_SESSION["userName"])){           

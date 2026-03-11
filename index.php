@@ -11,31 +11,31 @@
 <body class="fondo">
   <?php
     session_start();
-    session_destroy();
     setcookie(session_name(), '', time() - 3600, '/');
   ?>
-  <div class="d-flex justify-content-center align-items-center vh-100">
-    <div>
+  <div class="d-flex flex-column justify-content-center align-items-center vh-100 gap-4">
+    
+    <!-- Contenedor de Registro e Inicio de sesión -->
+    <div class="d-flex gap-3 flex-wrap justify-content-center">
+      
       <!--Registro-->
-      <div class="d-inline-block text-center p-3 border bg-dark text-white" style="min-width: 400px; vertical-align: top; min-height: 300px;">
-        <h3>Registrarse</h3>
+      <div class="text-center p-4 border border-light border-2 bg-dark bg-opacity-85 text-white rounded-3 shadow-lg" style="min-width: 380px; max-width: 380px;">
+        <h3 class="mb-4">Registrarse</h3>
         <form action="" method="post">
-            <input type="text" name="nombre" placeholder="Nombre" required><br>
-            <input type="text" name="email" pattern="[^\s@]+@[^\s@]+\.[^\s@]{1,3}" placeholder="Email" required><br>
-            <!-- La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número-->
-            <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="contraseña1" placeholder="Contraseña" required><br>
-            <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="contraseña2" placeholder="Confirme contraseña" required><br><br>
-            <input type="submit" class="btn btn-light btn-lg" value="Registrar">
-        </form><br>
+            <input type="text" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" name="nombre" placeholder="Nombre" required>
+            <input type="text" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" pattern="[^\s@]+@[^\s@]+\.[^\s@]{1,3}" name="email" placeholder="Email" required>
+            <input type="password" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="contraseña1" placeholder="Contraseña" required>
+            <input type="password" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="contraseña2" placeholder="Confirme contraseña" required>
+            <input type="submit" class="btn btn-outline-light btn-lg w-100 mt-2" value="Registrar">
+        </form>
+        <div class="mt-3">
         <?php
-
         $contra1 = isset($_POST["contraseña1"]) ? $_POST["contraseña1"] : "";
         $contra2 = isset($_POST["contraseña2"]) ? $_POST["contraseña2"] : "";
         $emailUsuario = isset($_POST["email"]) ? $_POST["email"] : "1";
 
-        if (isset($_POST["nombre"]) && isset($_POST["email"]) && isset($_POST["contraseña1"]) && isset($_POST["contraseña2"]) 
-            && $contra1 === $contra2){
-
+        if (isset($_POST["nombre"]) && isset($_POST["email"]) && isset($_POST["contraseña1"]) && isset($_POST["contraseña2"])){
+          if($contra1 === $contra2){
             $conexion = mysqli_connect("localhost", "root", "", "MH") or
             die("Problemas de conexion");
 
@@ -52,40 +52,50 @@
                 or die("Problemas en el insert" . mysqli_error($conexion));
 
                 mysqli_close($conexion);
-                echo "Usuario dado de alta";
+                echo "<p class='text-success mb-0'>Usuario dado de alta</p>";
             }
             else{
-                echo "Ya existe un usuario con el correo " . $emailUsuario;
-            }        
+                echo "<p class='text-danger mb-0'>Ya existe un usuario con el correo " . $emailUsuario . "</p>";
+            }
+          }else{
+            echo "<p class='text-danger mb-0'>Las contraseñas no coinciden</p>";
+          }
+                   
         }        
         ?>
+        </div>
       </div>
 
       <!--Inicio sesión-->
-      <div class="d-inline-block text-center p-3 border bg-dark text-white" style="min-width: 400px; vertical-align: top; min-height: 300px;">
-        <h3>Iniciar sesión</h3>
-        <br><br>
-        <form id="logFormulario" action="LogIn.php" method="post">
-            <input type="text" id="email" name="email" placeholder="Email" required><br>
-            <input type="password" id="logPass" name="contraseñaUsuario" placeholder="Contraseña Usuario"required><br><br>
-            <input type="submit" class="btn btn-light btn-lg" value="Iniciar sesión">
-        </form><br>
+      <div class="text-center p-4 border border-light border-2 bg-dark bg-opacity-85 text-white rounded-3 shadow-lg" style="min-width: 380px; max-width: 380px;">
+        <h3 class="mb-4">Iniciar sesión</h3>
+        <form id="logFormulario" action="LogIn.php" method="post" class="mt-5">
+            <input type="text" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" id="email" name="email" placeholder="Email" required>
+            <input type="password" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" id="logPass" name="contraseñaUsuario" placeholder="Contraseña" required>
+            <input type="submit" class="btn btn-outline-light btn-lg w-100 mt-2" value="Iniciar sesión">
+        </form>
+        <div class="mt-3">
         <?php
-        session_start();
         $error = isset($_SESSION["error"]) ? $_SESSION["error"] : "";
         if($error != ""){
-            echo "<p style='color:red;'>$error</p>";          
+            echo "<p class='text-danger mb-0'>$error</p>";          
             unset($_SESSION["error"]);
         }
         ?>
+        </div>
       </div>
 
-      <!--Continuar sin sesión-->
-      <div class="d-inline-block text-center p-3 border bg-dark text-white" style="min-width: 400px; vertical-align: top;min-height: 300px;">
-        <h3>Continuar sin iniciar sesión</h3><br><br><br>
-        <a href="seleccionPagina.php"><button type="button" class="btn btn-light btn-lg">Acceder</button></a>
-      </div>
     </div>
+
+    <!--Continuar sin sesión - Fuera y debajo-->
+    <div class="d-flex align-items-center gap-3 px-4 py-3 border border-light border-2 bg-dark bg-opacity-85 text-white rounded-3 shadow-lg">
+        <h5 class="mb-0">Continuar sin iniciar sesión</h5>
+        <a href="seleccionPagina.php" class="text-decoration-none">
+          <button type="button" class="btn btn-outline-light px-4">Acceder</button>
+        </a>
+    </div>
+
   </div>
+  <?php session_destroy()?>
 </body>
 </html>

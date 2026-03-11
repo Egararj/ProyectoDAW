@@ -126,7 +126,7 @@ function abrirListaModal(parteArmadura) {
       .map(([elemento, valor]) => `<img src="img/def/${elemento}-icon.png" class="img-icono"> : ${valor}`)
       .join("  ");
     const textoNombre = `${armadura.name}`;
-    const textoDetalles = `<img src="img/def/defense-icon.png" class="img-icono"> base: ${armadura.defense.base}  <img src="img/def/defense-icon.png" class="img-icono"> max: ${armadura.defense.max}, Res: ${resistenciasTexto}`;
+    const textoDetalles = `<img src="img/def/defense-icon.png" class="img-icono"> base: ${armadura.defense.base}  <img src="img/def/defense-icon.png" class="img-icono"> max: ${armadura.defense.max}   <img src="img/def/defense-icon.png" class="img-icono"> max: ${armadura.defense.augmented}, Res: ${resistenciasTexto}`;
     divNombre.textContent = textoNombre;
     divDetalles.innerHTML = textoDetalles;
 

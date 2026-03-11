@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'MiFuente';
+    src: url('fuentes/edosz.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html, body {
     height: 100%;
 }
@@ -145,9 +152,18 @@ hr {
     object-fit: contain;
 }
 
+.form-control::placeholder {
+    color: #adb5bd !important;
+    opacity: 1;
+}
+
+.form-control:focus::placeholder {
+    color: #6c757d !important;
+}
+
 #contenedor-flex p {
     margin-top: auto;
-
+    font-family: 'MiFuente';
 }
 
 #ul-modal {
