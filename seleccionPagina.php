@@ -6,6 +6,7 @@
     <title>Inicio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon32x32.png">
 </head>
 <body class="fondo">
   <div class="d-flex justify-content-center align-items-center vh-100">
@@ -13,7 +14,7 @@
       <div class="d-inline-block text-center p-3 border bg-dark text-white">
         <h3>Seleccione una página</h3>
         <a href="armor.php"><button type="button" class="btn btn-light btn-lg">Armaduras</button></a>
-        <button type="button" class="btn btn-light btn-lg">Ejemplo</button>
+        <a href="listaMonstruos.php"><button type="button" class="btn btn-light btn-lg">Lista Monstruos</button></a>
         <?php
           session_start();
             if(isset($_SESSION["userName"])){           

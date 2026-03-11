@@ -6,6 +6,7 @@
     <title>Armaduras</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon32x32.png">
 </head>
 <body class="fondo">
     <div id="cargando">
@@ -15,7 +16,7 @@
     </div>
     <div class="container-fluid text-center p-1 border bg-dark text-white" style="max-height: 100px;">
       <a href="armor.php"><button type="button" class="btn btn-light btn-sm">Armaduras</button></a>
-      <button type="button" class="btn btn-light btn-sm">Ejemplo</button>
+      <a href="listaMonstruos.php"><button type="button" class="btn btn-light btn-sm">Lista Monstruos</button></a>
       <?php
           session_start();
             if(isset($_SESSION["userName"])){           
@@ -111,7 +112,7 @@
                                     ?>
                             </div>
                             <div style ="width: 15%;" class="text-end">
-                                <button type="button" class="btn btn-danger btn-sm" id="borrarTodo" title="Limpia los campos de armadura y charm">Borrar</button>
+                                <button type="button" class="btn btn-danger btn-sm" id="borrarTodo" title="Limpia los campos de armadura y amuleto">Borrar</button>
                             </div>
                         </div>
                     </div>
