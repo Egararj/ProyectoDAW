@@ -21,10 +21,11 @@
       <!--Registro-->
       <div class="text-center p-4 border border-light border-2 bg-dark bg-opacity-85 text-white rounded-3 shadow-lg" style="min-width: 380px; max-width: 380px;">
         <h3 class="mb-4">Registrarse</h3>
-        <form action="" method="post">
+        <form action="" method="post" class="mt-5">
             <input type="text" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" name="nombre" placeholder="Nombre" required>
             <input type="text" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" pattern="[^\s@]+@[^\s@]+\.[^\s@]{1,3}" name="email" placeholder="Email" required>
             <input type="password" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="contraseña1" placeholder="Contraseña" required>
+            <small class="text-secondary d-block mb-3">Mínimo 8 caracteres, una mayúscula, una minúscula y un número</small>
             <input type="password" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="contraseña2" placeholder="Confirme contraseña" required>
             <input type="submit" class="btn btn-outline-light btn-lg w-100 mt-2" value="Registrar">
         </form>

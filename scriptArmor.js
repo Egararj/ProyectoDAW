@@ -95,17 +95,18 @@ document.getElementById("borrarCharm").addEventListener("click", function(e){
   borrarCharm();
 });
 
-document.getElementById("guardarSet").addEventListener("click", guardarSet);
 
-document.getElementById("btnSet1").addEventListener("click", function(){
+document.getElementById("guardarSet")?.addEventListener("click", guardarSet);
+
+document.getElementById("btnSet1")?.addEventListener("click", function(){
   cargarSet("1");
 });
 
-document.getElementById("btnSet2").addEventListener("click", function(){
+document.getElementById("btnSet2")?.addEventListener("click", function(){
   cargarSet("2");
 });
 
-document.getElementById("btnSet3").addEventListener("click", function(){
+document.getElementById("btnSet3")?.addEventListener("click", function(){
   cargarSet("3");
 });
 
