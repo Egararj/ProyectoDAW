@@ -114,22 +114,41 @@ document.getElementById("btnSet3")?.addEventListener("click", function(){
 function abrirListaModal(parteArmadura) {
   const ul = document.getElementById("ul-modal");
   ul.innerHTML = "";
+  const pTitulo = document.getElementById("tituloModal");
+  pTitulo.textContent = "Seleccione una parte de armadura";
   const armadurasFiltradas = armaduras.filter(armadura => armadura.type === parteArmadura);
   for (const armadura of armadurasFiltradas) {
     const li = document.createElement("li");
     const div = document.createElement("div");
     const divNombre = document.createElement("div");
     const divDetalles = document.createElement("div");
+    const divDetalles2 = document.createElement("div");
+    const divBloque = document.createElement("div");
+    const divHabilidades = document.createElement("div");
     div.className = "armadura-item";
     divNombre.className = "armadura-item-nombre";
     divDetalles.className = "armadura-item-def";
+    divDetalles2.className = "armadura-item-def";
+    divBloque.className = "armadura-bloque-def";
+    divHabilidades.className = "armadura-bloque-def";
     const resistenciasTexto = Object.entries(armadura.resistances)
-      .map(([elemento, valor]) => `<img src="img/def/${elemento}-icon.png" class="img-icono"> : ${valor}`)
+      .map(([elemento, valor]) => `<img src="img/def/${elemento}-icon.png" class="img-icono">${valor}`)
       .join("  ");
     const textoNombre = `${armadura.name}`;
-    const textoDetalles = `<img src="img/def/defense-icon.png" class="img-icono"> base: ${armadura.defense.base}  <img src="img/def/defense-icon.png" class="img-icono"> max: ${armadura.defense.max}   <img src="img/def/defense-icon.png" class="img-icono"> max: ${armadura.defense.augmented}, Res: ${resistenciasTexto}`;
+    let textoDetalles = `<img src="img/def/defense-icon.png" class="img-icono"> base: ${armadura.defense.base}  <img src="img/def/defense-icon.png" class="img-icono"> max: ${armadura.defense.max}   <img src="img/def/defense-icon.png" class="img-icono"> max: ${armadura.defense.augmented}`;
     divNombre.textContent = textoNombre;
     divDetalles.innerHTML = textoDetalles;
+    textoDetalles = `Res: ${resistenciasTexto}`;
+    divDetalles2.innerHTML = textoDetalles;
+
+    for(const habilidad of armadura.skills){
+      const divDetallesHabilidad = document.createElement("div");
+      divDetallesHabilidad.className = "armadura-item-def";
+      textoDetalles = `${habilidad.skillName} ${habilidad.level}`;
+      console.log(textoDetalles);
+      divDetallesHabilidad.innerHTML = textoDetalles;
+      divHabilidades.appendChild(divDetallesHabilidad);
+    }
 
     // Botón de los li
     li.style.cursor = "pointer";
@@ -140,9 +159,11 @@ function abrirListaModal(parteArmadura) {
       actualizarInfoStats();
       modal.close();
     });
-
+    divBloque.appendChild(divDetalles);
+    divBloque.appendChild(divDetalles2);
     div.appendChild(divNombre);
-    div.appendChild(divDetalles);
+    div.appendChild(divBloque);
+    div.appendChild(divHabilidades);
     li.appendChild(div);
     ul.appendChild(li);
   }
@@ -152,7 +173,9 @@ function abrirListaModal(parteArmadura) {
 // Función para abrir el modal con la lista de amuletos
 function abrirListaModalCharm() {
 const ul = document.getElementById("ul-modal");
-  ul.innerHTML = "";
+ul.innerHTML = "";
+const pTitulo = document.getElementById("tituloModal");
+pTitulo.textContent = "Seleccione un amuleto";
   for (const amuleto of amuletos) {
     for(const rank of amuleto.ranks) {
       const li = document.createElement("li");

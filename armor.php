@@ -186,7 +186,7 @@
         </div>
     </div>
 <dialog id="modal">
-    <p>Seleccione una parte de armadura</p>
+    <p id="tituloModal">Seleccione una parte de armadura</p>
     <ul id="ul-modal">
     </ul>
 </dialog>

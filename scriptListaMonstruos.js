@@ -23,6 +23,6 @@ async function cargarListaMonstruos() {
 }
 
 async function cargarJson() {
-    const response = await fetch("listaMonstruos.json");
+    const response = await fetch("JSON/listaMonstruos.json");
     listaMonstruos = await response.json();
 }
