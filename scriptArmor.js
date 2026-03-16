@@ -392,12 +392,12 @@ function borrarTodo() {
   setCompleto.equipamiento.legs = null;
   setCompleto.charm.id = null;
   setCompleto.charm.rank = null;
-  document.getElementById("head-title").textContent = "";
-  document.getElementById("chest-title").textContent = "";
-  document.getElementById("gloves-title").textContent = "";
-  document.getElementById("waist-title").textContent = "";
-  document.getElementById("legs-title").textContent = "";
-  document.getElementById("charm-title").textContent = "";
+  document.getElementById("head-title").textContent = "Click aquí para seleccionar un casco";
+  document.getElementById("chest-title").textContent = "Click aquí para seleccionar una pechera";
+  document.getElementById("gloves-title").textContent = "Click aquí para seleccionar unos guantes";
+  document.getElementById("waist-title").textContent = "Click aquí para seleccionar una muslera";
+  document.getElementById("legs-title").textContent = "Click aquí para seleccionar unas perneras";
+  document.getElementById("charm-title").textContent = "Click aquí para seleccionar un amuleto";
   actualizarInfoStats();
 }
 

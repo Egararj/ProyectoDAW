@@ -35,46 +35,46 @@
                 <div class="caja">
                     <div class ="caja-interior" id="head">
                         <img src="img/armor/head-icon.png" style="width: 30px;height: 30px;">
-                        <p>Cabeza</p>
+                        <p>Casco</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarHead">X</button></div>
                         <br>
-                        <p id="head-title"></p>
+                        <p id="head-title">Click aquí para seleccionar un casco</p>
                     </div>
                 </div>
                 <div class="caja">
                     <div class ="caja-interior" id="chest">
                         <img src="img/armor/chest-icon.png" style="width: 30px;height: 30px;">
-                        <p>Pecho</p>
+                        <p>Pechera</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarChest">X</button></div>
                         <br>
-                        <p id="chest-title"></p>
+                        <p id="chest-title">Click aquí para seleccionar una pechera</p>
                     </div>
                 </div>
                 <div class="caja">
                     <div class ="caja-interior" id="gloves">
                         <img src="img/armor/arms-icon.png" style="width: 30px;height: 30px;">
-                        <p>Brazos</p>
+                        <p>Guantes</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarGloves">X</button></div>
                         <br>
-                        <p id="gloves-title"></p>
+                        <p id="gloves-title">Click aquí para seleccionar unos guantes</p>
                     </div>
                 </div>
                 <div class="caja">
                     <div class ="caja-interior" id="waist">
                         <img src="img/armor/waist-icon.png" style="width: 30px;height: 30px;">
-                        <p>Cintura</p>
+                        <p>Muslera</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarWaist">X</button></div>
                         <br>
-                        <p id="waist-title"></p>
+                        <p id="waist-title">Click aquí para seleccionar una muslera</p>
                     </div>
                 </div>
                 <div class="caja">
                     <div class ="caja-interior" id="legs">
                         <img src="img/armor/legs-icon.png" style="width: 30px;height: 30px;">
-                        <p>Piernas</p>
+                        <p>Perneras</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarLegs">X</button></div>
                         <br>
-                        <p id="legs-title"></p>
+                        <p id="legs-title">Click aquí para seleccionar unas perneras</p>
                     </div>
                 </div>
                 <div class="caja">
@@ -83,7 +83,7 @@
                         <p>Amuleto</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarCharm">X</button></div>
                         <br>
-                        <p id="charm-title"></p>
+                        <p id="charm-title">Click aquí para seleccionar un amuleto</p>
                     </div>
                 </div>
         </div>
