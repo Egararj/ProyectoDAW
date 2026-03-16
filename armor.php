@@ -38,7 +38,7 @@
                         <p>Casco</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarHead">X</button></div>
                         <br>
-                        <p id="head-title">Click aquí para seleccionar un casco</p>
+                        <p id="head-title">Click aquí para seleccionar</p>
                     </div>
                 </div>
                 <div class="caja">
@@ -47,7 +47,7 @@
                         <p>Pechera</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarChest">X</button></div>
                         <br>
-                        <p id="chest-title">Click aquí para seleccionar una pechera</p>
+                        <p id="chest-title">Click aquí para seleccionar</p>
                     </div>
                 </div>
                 <div class="caja">
@@ -56,7 +56,7 @@
                         <p>Guantes</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarGloves">X</button></div>
                         <br>
-                        <p id="gloves-title">Click aquí para seleccionar unos guantes</p>
+                        <p id="gloves-title">Click aquí para seleccionar</p>
                     </div>
                 </div>
                 <div class="caja">
@@ -65,7 +65,7 @@
                         <p>Muslera</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarWaist">X</button></div>
                         <br>
-                        <p id="waist-title">Click aquí para seleccionar una muslera</p>
+                        <p id="waist-title">Click aquí para seleccionar</p>
                     </div>
                 </div>
                 <div class="caja">
@@ -74,7 +74,7 @@
                         <p>Perneras</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarLegs">X</button></div>
                         <br>
-                        <p id="legs-title">Click aquí para seleccionar unas perneras</p>
+                        <p id="legs-title">Click aquí para seleccionar</p>
                     </div>
                 </div>
                 <div class="caja">
@@ -83,7 +83,7 @@
                         <p>Amuleto</p>
                         <div class="text-end" style="flex:1"><button type="button" class="btn btn-danger btn-sm fw-bold text-white" id="borrarCharm">X</button></div>
                         <br>
-                        <p id="charm-title">Click aquí para seleccionar un amuleto</p>
+                        <p id="charm-title">Click aquí para seleccionar</p>
                     </div>
                 </div>
         </div>

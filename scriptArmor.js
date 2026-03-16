@@ -392,25 +392,25 @@ function borrarTodo() {
   setCompleto.equipamiento.legs = null;
   setCompleto.charm.id = null;
   setCompleto.charm.rank = null;
-  document.getElementById("head-title").textContent = "Click aquí para seleccionar un casco";
-  document.getElementById("chest-title").textContent = "Click aquí para seleccionar una pechera";
-  document.getElementById("gloves-title").textContent = "Click aquí para seleccionar unos guantes";
-  document.getElementById("waist-title").textContent = "Click aquí para seleccionar una muslera";
-  document.getElementById("legs-title").textContent = "Click aquí para seleccionar unas perneras";
-  document.getElementById("charm-title").textContent = "Click aquí para seleccionar un amuleto";
+  document.getElementById("head-title").textContent = "Click aquí para seleccionar";
+  document.getElementById("chest-title").textContent = "Click aquí para seleccionar";
+  document.getElementById("gloves-title").textContent = "Click aquí para seleccionar";
+  document.getElementById("waist-title").textContent = "Click aquí para seleccionar";
+  document.getElementById("legs-title").textContent = "Click aquí para seleccionar";
+  document.getElementById("charm-title").textContent = "Click aquí para seleccionar";
   actualizarInfoStats();
 }
 
 function borrarParteArmadura(parte) {
   setCompleto.equipamiento[parte] = null;
-  document.getElementById(parte + "-title").textContent = "";
+  document.getElementById(parte + "-title").textContent = "Click aquí para seleccionar";
   actualizarInfoStats();
 }
 
 function borrarCharm() {
   setCompleto.charm.id = null;
   setCompleto.charm.rank = null;
-  document.getElementById("charm-title").textContent = "";
+  document.getElementById("charm-title").textContent = "Click aquí para seleccionar";
   actualizarInfoStats();
 }
 
