@@ -90,28 +90,24 @@
         <div class="panel-derecho">
                 <div class="cajaInfo">
                     <div class="container-fluid">
-                        <div style="display: flex;">
-                            <div style="width: 85%;">
-                                <?php
-                                    if(isset($_SESSION["userName"])){           
-                                    ?>
+                        <div class="d-flex flex-wrap align-items-start">
+                            <div class="flex-grow-1">
+                                <?php if(isset($_SESSION["userName"])): ?>
                                     <label>Cargar set:</label>
                                     <button id="btnSet1" type="button" class="btn btn-light btn-sm">Set 1</button>
                                     <button id="btnSet2" type="button" class="btn btn-light btn-sm">Set 2</button>
                                     <button id="btnSet3" type="button" class="btn btn-light btn-sm">Set 3</button>
                                     <br><br>
                                     <label>Guardar set:</label>
-                                    <select id="selectSet" class="form-select d-inline-block" aria-label="Small select example" style="width: 85px;">
+                                    <select id="selectSet" class="form-select d-inline-block" style="width: 85px;">
                                         <option selected value="1">Set 1</option>
                                         <option value="2">Set 2</option>
                                         <option value="3">Set 3</option>
                                     </select>
                                     <button type="button" class="btn btn-light" id="guardarSet">Guardar</button>
-                                    <?php
-                                    }
-                                    ?>
+                                <?php endif; ?>
                             </div>
-                            <div style ="width: 15%;" class="text-end">
+                            <div class="flex-shrink-0 text-end ms-auto">
                                 <button type="button" class="btn btn-danger btn-sm" id="borrarTodo" title="Limpia los campos de armadura y amuleto">Borrar</button>
                             </div>
                         </div>

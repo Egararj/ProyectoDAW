@@ -26,8 +26,14 @@ hr {
     min-height: 100vh;
 }
 .panel-izquierdo {
-    width: 60%;
+    width: 50%;
     padding: 20px;
+    height: 100vh;        /* altura fija igual a la ventana */
+    overflow-y: auto;     /* scrollbar vertical cuando no quepan */
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    box-sizing: border-box; /* evita que el padding desborde el width */
 }
 
 .panel-derecho {
@@ -37,9 +43,9 @@ hr {
 
 
 .contenedor-flex {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-auto-rows: 1fr;
 }
 
 .caja {
@@ -58,12 +64,12 @@ hr {
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s;
-    min-height: 150px;          
+    min-height: 150px;  
+    min-width: 230px;
+    max-height: 300px;        
 }
 
 .cajaMonstruos {
-    width: 32%;
-    min-height: 50%;
     border-radius: 5px;
     border-color: white;
     border-style: solid;
@@ -76,6 +82,8 @@ hr {
     color: white;
     font-size: 30px;
     font-weight: bold;
+    width: auto;
+    min-height: auto;
 }
 
 .cajaInfo {
@@ -197,6 +205,15 @@ hr {
   list-style: none;
 }
 
+#ul-defensa li > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#ul-defensa li > div > div:first-child {
+    min-width: 120px;
+}
 #ul-habilidades {
   list-style: none;
 }
