@@ -12,7 +12,13 @@ $datos = json_decode($json, true);
 $setCompleto = $datos['setCompleto'];
 $numeroSet = $datos['numeroSet'];
 
-$conexion = mysqli_connect("localhost", "root", "", "MH") or die("Error de conexión");
+$host = "sql100.infinityfree.com";
+$user = "if0_41649473";    
+$pass = "7EVjcACHzYcXFTR";
+$db   = "if0_41649473_mh";  
+$port = 3306;
+
+$conexion = new mysqli($host,$user,$pass,$db,$port);
 
 $email = $_SESSION["email"];
 $setJson = json_encode($setCompleto);

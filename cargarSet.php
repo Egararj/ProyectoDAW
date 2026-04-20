@@ -4,7 +4,13 @@ session_start();
 $numeroSet = $_GET['set'];
 $email = $_SESSION["email"];
 
-$conexion = mysqli_connect("localhost", "root", "", "MH");
+$host = "sql100.infinityfree.com";
+$user = "if0_41649473";    
+$pass = "7EVjcACHzYcXFTR";
+$db   = "if0_41649473_mh";  
+$port = 3306;
+
+$conexion = new mysqli($host,$user,$pass,$db,$port);
 $columna = "set" . $numeroSet;
 
 $query = "SELECT $columna FROM usuarios WHERE userEmail = '$email'";

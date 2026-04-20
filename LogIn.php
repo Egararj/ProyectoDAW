@@ -2,12 +2,21 @@
     
     $email = isset($_POST["email"]) ? $_POST["email"] : "";
     $contraseñaUsuario = isset($_POST["contraseñaUsuario"]) ? $_POST["contraseñaUsuario"] : "";
-
+    
 
     if(isset($_POST["email"]) && isset($_POST["contraseñaUsuario"])){
-        
-        $conexion = mysqli_connect("localhost","root","","MH") or
-        die("Problemas de conexion");
+        $host = "sql100.infinityfree.com";
+        $user = "if0_41649473";    
+        $pass = "7EVjcACHzYcXFTR";
+        $db   = "if0_41649473_mh";  
+        $port = 3306;
+
+        $conexion = new mysqli($host,$user,$pass,$db,$port);
+            if($conexion->connect_error){
+                session_start();
+                header("Location: index.php");
+                exit(); 
+            }
 
         $resultado = mysqli_query($conexion, "SELECT * FROM usuarios WHERE userEmail = '$email'");
 
