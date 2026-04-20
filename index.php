@@ -13,13 +13,13 @@
     session_start();
     setcookie(session_name(), '', time() - 3600, '/');
   ?>
-  <div class="d-flex flex-column justify-content-center align-items-center vh-100 gap-4">
+  <div class="d-flex flex-column justify-content-center align-items-center min-vh-100 gap-4 pt-5">
     
     <!-- Contenedor de Registro e Inicio de sesión -->
-    <div class="d-flex gap-3 flex-wrap justify-content-center">
+    <div class="d-flex gap-3 flex-wrap justify-content-center w-100">
       
       <!--Registro-->
-      <div class="text-center p-4 border border-light border-2 bg-dark bg-opacity-85 text-white rounded-3 shadow-lg" style="min-width: 380px; max-width: 380px;">
+      <div class="text-center p-4 border border-light border-2 bg-dark bg-opacity-85 text-white rounded-3 shadow-lg" style="flex: 1 1 300px; max-width: 380px;">
         <h3 class="mb-4">Registrarse</h3>
         <form action="" method="post" class="mt-5">
             <input type="text" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" name="nombre" placeholder="Nombre" required>
@@ -68,7 +68,7 @@
       </div>
 
       <!--Inicio sesión-->
-      <div class="text-center p-4 border border-light border-2 bg-dark bg-opacity-85 text-white rounded-3 shadow-lg" style="min-width: 380px; max-width: 380px;">
+      <div class="text-center p-4 border border-light border-2 bg-dark bg-opacity-85 text-white rounded-3 shadow-lg" style="flex: 1 1 300px; max-width: 380px;">
         <h3 class="mb-4">Iniciar sesión</h3>
         <form id="logFormulario" action="LogIn.php" method="post" class="mt-5">
             <input type="text" class="form-control form-control-lg mb-3 bg-dark text-white border-secondary" id="email" name="email" placeholder="Email" required>

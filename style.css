@@ -23,21 +23,24 @@ hr {
 
 .contenedor-panel{
     display: flex;
+    flex-wrap: wrap;
     min-height: 100vh;
 }
 .panel-izquierdo {
     width: 50%;
+    min-width: 600px;
     padding: 20px;
-    height: 100vh;        /* altura fija igual a la ventana */
-    overflow-y: auto;     /* scrollbar vertical cuando no quepan */
+    height: 100vh;
+    overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    box-sizing: border-box; /* evita que el padding desborde el width */
+    box-sizing: border-box;
 }
 
 .panel-derecho {
     flex: 1;
+    min-width: 300px;
     padding: 20px;
 }
 

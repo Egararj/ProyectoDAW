@@ -13,8 +13,11 @@
     <div>
       <div class="d-inline-block text-center p-3 border bg-dark text-white">
         <h3>Seleccione una página</h3>
+        <br>
         <a href="armor.php"><button type="button" class="btn btn-light btn-lg">Armaduras</button></a>
+        <br><br>
         <a href="listaMonstruos.php"><button type="button" class="btn btn-light btn-lg">Lista de Monstruos</button></a>
+        <br><br>
         <?php
           session_start();
             if(isset($_SESSION["userName"])){           
